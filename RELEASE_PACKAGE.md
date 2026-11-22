@@ -4,11 +4,11 @@
 |---|---|
 | **Repository** | https://github.com/faezeh-kazemzadeh/Book2Fkashcard |
 | **Branch** | `claude/book2flashcards-ai-pro-e8mlhi` |
-| **Tracked files** | 107 (including this document) |
+| **Tracked files** | 108 (including this document and BUILD_REPORT.md) |
 | **Swift files** | 83 files, ~12,260 lines |
 | **Minimum OS** | iOS 17.0 (iPhone and iPad) · Apple Intelligence provider needs iOS 26 |
 | **Toolchain** | Xcode 16.4 or later · Swift 5 language mode · XcodeGen |
-| **Status** | **Not yet building.** See [Build status](#build-status). |
+| **Status** | ✅ CI green on Linux, macOS and iOS since `5923f78` (run #9). See [BUILD_REPORT.md](BUILD_REPORT.md). |
 
 ### Files by area
 
@@ -25,10 +25,10 @@
 
 ## Build status
 
-The code was written in an environment with no Swift compiler, so CI is the first place it is ever compiled.
+All three CI jobs pass as of commit `5923f78` (run #9): core package on Linux and macOS (62/62 tests each), iOS app build with 23 unit/integration tests passing (1 Keychain test skipped in unsigned CI builds) and 6/6 UI tests.
+Getting there took 9 runs; every failure, fix and remaining caveat is documented in **[BUILD_REPORT.md](BUILD_REPORT.md)**.
 
-| CI run | Commit | Result |
-|---|---|---|
+---|---|---|
 | #1 | `3e5ff36` | **Failed in all 3 jobs** (Linux core, macOS core, iOS app) |
 | #2 | the commit that adds this file | Pending: check the Actions tab |
 
@@ -162,7 +162,7 @@ xcodebuild test -project Book2Flashcards.xcodeproj -scheme Book2Flashcards \
 
 ## Known compilation risks
 
-These are places where the code relies on behaviour I could not verify without a compiler, ordered from most to least likely to fail.
+The code now compiles with Xcode 16.4 (Swift 5 language mode) and Swift 6.0 on Linux. The risks below remain relevant for **other toolchains** (Xcode 26, Swift 6 language mode) and for future edits.
 
 | # | Risk | Where | Likely fix |
 |---|---|---|---|
