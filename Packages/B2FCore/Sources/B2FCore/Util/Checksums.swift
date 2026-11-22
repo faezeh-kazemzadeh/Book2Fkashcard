@@ -70,9 +70,15 @@ public enum SHA1 {
             }
             h0 = h0 &+ a; h1 = h1 &+ b; h2 = h2 &+ c; h3 = h3 &+ d; h4 = h4 &+ e
         }
-        return [h0, h1, h2, h3, h4].flatMap { value in
-            [UInt8(value >> 24), UInt8((value >> 16) & 0xFF), UInt8((value >> 8) & 0xFF), UInt8(value & 0xFF)]
+        var output: [UInt8] = []
+        output.reserveCapacity(20)
+        for value in [h0, h1, h2, h3, h4] {
+            output.append(UInt8(truncatingIfNeeded: value >> 24))
+            output.append(UInt8(truncatingIfNeeded: value >> 16))
+            output.append(UInt8(truncatingIfNeeded: value >> 8))
+            output.append(UInt8(truncatingIfNeeded: value))
         }
+        return output
     }
 
     public static func hexDigest(_ string: String) -> String {
