@@ -1,5 +1,7 @@
 # Installing the unsigned IPA on your own iPhone (free Apple ID)
 
+> **Windows PC, no Mac?** Follow the detailed step-by-step guide in [`INSTALL_ON_IPHONE.md`](../INSTALL_ON_IPHONE.md). This page is the short overview.
+
 The **Unsigned IPA** workflow (`.github/workflows/unsigned-ipa.yml`) builds a Release `.ipa` on every push to `main` or `claude/**` and on demand. It is **not signed**, so iOS will not install it directly. A sideloading tool signs it on your computer with your **free Apple ID**, then installs it.
 
 ## 1. Download the IPA
