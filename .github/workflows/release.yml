@@ -1,0 +1,77 @@
+name: Release
+
+# Pushing a tag like v1.0.0-personal builds the unsigned IPA from that commit
+# (same verified workflow as CI) and publishes a GitHub Release with the IPA and
+# dSYM attached as permanent assets (workflow artifacts expire after 30 days).
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    uses: ./.github/workflows/unsigned-ipa.yml
+
+  release:
+    name: Publish GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+
+      - name: Prepare assets
+        run: |
+          set -euo pipefail
+          cd dist
+          ls -R
+          IPA=$(find . -name '*-unsigned.ipa' -type f | head -1)
+          test -n "$IPA" || { echo "::error::IPA not found in artifacts"; exit 1; }
+          mv "$IPA" "../${{ needs.build.outputs.ipa_name }}"
+          DSYM_DIR=$(find . -maxdepth 1 -type d -name '*-dSYM' | head -1)
+          if [ -n "$DSYM_DIR" ]; then
+            (cd "$DSYM_DIR" && zip -qry "../../Book2Flashcards-${GITHUB_REF_NAME}-dSYM.zip" .)
+          fi
+          cd .. && ls -lh *.ipa *.zip 2>/dev/null || true
+
+      - name: Write release notes
+        run: |
+          REPO="https://github.com/${GITHUB_REPOSITORY}"
+          TAG="${GITHUB_REF_NAME}"
+          cat > notes.md <<NOTES
+          Personal-use build of **Book2Flashcards AI Pro 1.0.0**.
+
+          **The IPA is unsigned.** It must be signed with your own Apple ID before iOS will install it (free Apple ID: 7-day signature, no iCloud sync, no in-app purchases).
+
+          ### Install
+          - Windows PC, no Mac: [INSTALL_ON_IPHONE.md](${REPO}/blob/${TAG}/INSTALL_ON_IPHONE.md)
+          - Short overview (Sideloadly, AltStore, Xcode): [SIDELOADING.md](${REPO}/blob/${TAG}/docs/SIDELOADING.md)
+
+          ### Status and readiness
+          - [FINAL_RELEASE_REPORT.md](${REPO}/blob/${TAG}/FINAL_RELEASE_REPORT.md): build status, tests, risks, manual test checklist, TestFlight/App Store readiness
+          - [BUILD_REPORT.md](${REPO}/blob/${TAG}/BUILD_REPORT.md): CI history and fixes
+
+          ### Assets
+          - \`${{ needs.build.outputs.ipa_name }}\`: unsigned arm64 Release build, iOS/iPadOS 17.0+
+          - \`Book2Flashcards-${TAG}-dSYM.zip\`: debug symbols for reading crash reports from this build
+
+          Built from commit \`${GITHUB_SHA::7}\`. Not intended for App Store or TestFlight distribution.
+          NOTES
+          cat notes.md
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "Book2Flashcards AI Pro ${GITHUB_REF_NAME}" \
+            --notes-file notes.md \
+            --verify-tag \
+            "${{ needs.build.outputs.ipa_name }}" \
+            Book2Flashcards-"$GITHUB_REF_NAME"-dSYM.zip

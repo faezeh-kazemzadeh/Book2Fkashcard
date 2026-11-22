@@ -6,6 +6,12 @@ name: Unsigned IPA
 
 on:
   workflow_dispatch:
+  # Reused by release.yml so tagged releases ship the same verified build.
+  workflow_call:
+    outputs:
+      ipa_name:
+        description: File name of the unsigned IPA artifact
+        value: ${{ jobs.ipa.outputs.ipa_name }}
   push:
     branches: [main, "claude/**"]
     paths-ignore:
@@ -20,6 +26,8 @@ jobs:
     name: Build unsigned IPA
     runs-on: macos-15
     timeout-minutes: 45
+    outputs:
+      ipa_name: ${{ steps.package.outputs.ipa_name }}
     steps:
       - uses: actions/checkout@v4
 
@@ -48,6 +56,7 @@ jobs:
             DEVELOPMENT_TEAM="" | xcbeautify
 
       - name: Package IPA
+        id: package
         run: |
           APP="build/Book2Flashcards.xcarchive/Products/Applications/Book2Flashcards.app"
           test -d "$APP" || { echo "App bundle not found in archive"; exit 1; }
@@ -58,6 +67,7 @@ jobs:
           NAME="Book2Flashcards-${VERSION}-${BUILD}-${GITHUB_SHA::7}-unsigned.ipa"
           (cd build/ipa && zip -qry "../$NAME" Payload)
           echo "IPA_NAME=$NAME" >> "$GITHUB_ENV"
+          echo "ipa_name=$NAME" >> "$GITHUB_OUTPUT"
           # Sanity checks: correct platform, arm64 binary, not signed.
           /usr/libexec/PlistBuddy -c "Print CFBundleSupportedPlatforms:0" "$APP/Info.plist"
           lipo -info "$APP/Book2Flashcards"
