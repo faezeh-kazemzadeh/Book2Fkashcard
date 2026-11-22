@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "claude/**"]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  core-linux:
+    name: B2FCore (Linux)
+    runs-on: ubuntu-latest
+    container: swift:6.0-noble
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install SQLite headers
+        run: apt-get update && apt-get install -y libsqlite3-dev
+      - name: Build & test core package
+        run: swift test --package-path Packages/B2FCore --parallel
+
+  core-macos:
+    name: B2FCore (macOS, with DEFLATE)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test core package
+        run: swift test --package-path Packages/B2FCore --parallel
+
+  ios:
+    name: iOS app (build, unit, integration & UI tests)
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.4.app || sudo xcode-select -s "$(ls -d /Applications/Xcode*.app | sort -V | tail -1)"
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate project
+        run: B2F_TEAM_ID="" xcodegen generate
+      - name: Pick simulator
+        id: sim
+        run: |
+          UDID=$(xcrun simctl list devices available -j | python3 -c "import json,sys; d=json.load(sys.stdin)['devices']; print(next(x['udid'] for r,v in d.items() if 'iOS' in r for x in v if x['name'].startswith('iPhone')))")
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+      - name: Build & test
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project Book2Flashcards.xcodeproj \
+            -scheme Book2Flashcards \
+            -destination "id=${{ steps.sim.outputs.udid }}" \
+            -resultBundlePath TestResults.xcresult \
+            CODE_SIGNING_ALLOWED=NO | xcbeautify || exit 1
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: TestResults
+          path: TestResults.xcresult

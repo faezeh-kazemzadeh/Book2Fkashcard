@@ -1,0 +1,23 @@
+# Xcode
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+DerivedData/
+*.xcresult
+build/
+
+# SwiftPM
+.build/
+.swiftpm/
+Packages/B2FCore/.build/
+Package.resolved
+
+# Secrets – never commit
+*.p8
+*.p12
+*.mobileprovision
+.env
+Backend/ai-proxy/.dev.vars
+
+# OS
+.DS_Store

@@ -1,0 +1,1016 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%lld days": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld روز"
+          }
+        }
+      }
+    },
+    "Add": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "افزودن"
+          }
+        }
+      }
+    },
+    "Again": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دوباره"
+          }
+        }
+      }
+    },
+    "Algorithm": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الگوریتم"
+          }
+        }
+      }
+    },
+    "All done!": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تمام شد!"
+          }
+        }
+      }
+    },
+    "Anki Exports": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خروجی‌های Anki"
+          }
+        }
+      }
+    },
+    "Audio": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صدا"
+          }
+        }
+      }
+    },
+    "Book2Flashcards Premium": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Book2Flashcards پریمیوم"
+          }
+        }
+      }
+    },
+    "Books": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کتاب‌ها"
+          }
+        }
+      }
+    },
+    "By book": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بر اساس کتاب"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لغو"
+          }
+        }
+      }
+    },
+    "Cards Generated": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کارت‌های ساخته‌شده"
+          }
+        }
+      }
+    },
+    "Check": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بررسی"
+          }
+        }
+      }
+    },
+    "Close": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بستن"
+          }
+        }
+      }
+    },
+    "Correct": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "درست"
+          }
+        }
+      }
+    },
+    "Create": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ایجاد"
+          }
+        }
+      }
+    },
+    "Created %lld flashcards": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld فلش‌کارت ساخته شد"
+          }
+        }
+      }
+    },
+    "Creating flashcards": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "در حال ساخت فلش‌کارت‌ها"
+          }
+        }
+      }
+    },
+    "Dashboard": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "داشبورد"
+          }
+        }
+      }
+    },
+    "Delete": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حذف"
+          }
+        }
+      }
+    },
+    "Detecting lessons": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "در حال شناسایی درس‌ها"
+          }
+        }
+      }
+    },
+    "Due Now": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آماده مرور"
+          }
+        }
+      }
+    },
+    "Easy": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آسان"
+          }
+        }
+      }
+    },
+    "English accent": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لهجه انگلیسی"
+          }
+        }
+      }
+    },
+    "Explain with AI": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "توضیح با هوش مصنوعی"
+          }
+        }
+      }
+    },
+    "Export": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خروجی"
+          }
+        }
+      }
+    },
+    "Export Entire Book": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خروجی کل کتاب"
+          }
+        }
+      }
+    },
+    "Export to Anki": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خروجی به Anki"
+          }
+        }
+      }
+    },
+    "Failed": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ناموفق"
+          }
+        }
+      }
+    },
+    "Free plan": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "طرح رایگان"
+          }
+        }
+      }
+    },
+    "Get Started": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شروع کنید"
+          }
+        }
+      }
+    },
+    "Good": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خوب"
+          }
+        }
+      }
+    },
+    "Grammar": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دستور زبان"
+          }
+        }
+      }
+    },
+    "Hard": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سخت"
+          }
+        }
+      }
+    },
+    "I'm learning": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "یاد می‌گیرم"
+          }
+        }
+      }
+    },
+    "Import Anki Deck": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وارد کردن دسته Anki"
+          }
+        }
+      }
+    },
+    "Import File": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وارد کردن فایل"
+          }
+        }
+      }
+    },
+    "Import a PDF, EPUB, Word file or photos of your textbook, or scan pages with the camera.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "یک فایل PDF، EPUB، ورد یا عکس صفحات کتاب را وارد کنید یا صفحات را با دوربین اسکن کنید."
+          }
+        }
+      }
+    },
+    "Imported %lld cards.": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld کارت وارد شد."
+          }
+        }
+      }
+    },
+    "Language you are learning": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زبانی که یاد می‌گیرید"
+          }
+        }
+      }
+    },
+    "Languages": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زبان‌ها"
+          }
+        }
+      }
+    },
+    "Learning": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "در حال یادگیری"
+          }
+        }
+      }
+    },
+    "Learning Streak": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "روزهای پیاپی"
+          }
+        }
+      }
+    },
+    "Lessons": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "درس‌ها"
+          }
+        }
+      }
+    },
+    "Level": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سطح"
+          }
+        }
+      }
+    },
+    "Library": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کتابخانه"
+          }
+        }
+      }
+    },
+    "Low OCR confidence – please check": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اطمینان پایین OCR – لطفاً بررسی کنید"
+          }
+        }
+      }
+    },
+    "Monthly Progress": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پیشرفت ماهانه"
+          }
+        }
+      }
+    },
+    "My level": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سطح من"
+          }
+        }
+      }
+    },
+    "My native language": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زبان مادری من"
+          }
+        }
+      }
+    },
+    "Native language": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زبان مادری"
+          }
+        }
+      }
+    },
+    "New Book": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کتاب جدید"
+          }
+        }
+      }
+    },
+    "Next": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بعدی"
+          }
+        }
+      }
+    },
+    "No books yet": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هنوز کتابی ندارید"
+          }
+        }
+      }
+    },
+    "Not now": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فعلاً نه"
+          }
+        }
+      }
+    },
+    "OK": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "باشه"
+          }
+        }
+      }
+    },
+    "Offline – changes will sync later": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آفلاین – تغییرات بعداً همگام می‌شوند"
+          }
+        }
+      }
+    },
+    "Photos": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عکس‌ها"
+          }
+        }
+      }
+    },
+    "Playback speed": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سرعت پخش"
+          }
+        }
+      }
+    },
+    "Premium": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پریمیوم"
+          }
+        }
+      }
+    },
+    "Privacy Policy": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سیاست حریم خصوصی"
+          }
+        }
+      }
+    },
+    "Pronunciation audio": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صدای تلفظ"
+          }
+        }
+      }
+    },
+    "Quiz complete": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آزمون تمام شد"
+          }
+        }
+      }
+    },
+    "Quizzes": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آزمون‌ها"
+          }
+        }
+      }
+    },
+    "Reading": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خواندن"
+          }
+        }
+      }
+    },
+    "Reading file": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "در حال خواندن فایل"
+          }
+        }
+      }
+    },
+    "Ready": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آماده"
+          }
+        }
+      }
+    },
+    "Recognising text": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "در حال تشخیص متن"
+          }
+        }
+      }
+    },
+    "Restore Purchases": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بازیابی خریدها"
+          }
+        }
+      }
+    },
+    "Retention Rate": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نرخ یادسپاری"
+          }
+        }
+      }
+    },
+    "Review progress (scheduling)": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پیشرفت مرور (زمان‌بندی)"
+          }
+        }
+      }
+    },
+    "Reviews Today": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرورهای امروز"
+          }
+        }
+      }
+    },
+    "Save": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ذخیره"
+          }
+        }
+      }
+    },
+    "Scan Pages": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اسکن صفحات"
+          }
+        }
+      }
+    },
+    "Search": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جستجو"
+          }
+        }
+      }
+    },
+    "Settings": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تنظیمات"
+          }
+        }
+      }
+    },
+    "Share .apkg": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اشتراک‌گذاری ‎.apkg"
+          }
+        }
+      }
+    },
+    "Show Answer": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نمایش پاسخ"
+          }
+        }
+      }
+    },
+    "Sign in to iCloud to sync": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "برای همگام‌سازی وارد iCloud شوید"
+          }
+        }
+      }
+    },
+    "Something went wrong": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مشکلی پیش آمد"
+          }
+        }
+      }
+    },
+    "Spaced repetition": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تکرار فاصله‌دار"
+          }
+        }
+      }
+    },
+    "Speaking": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صحبت کردن"
+          }
+        }
+      }
+    },
+    "Study": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مطالعه"
+          }
+        }
+      }
+    },
+    "Study Heatmap": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نقشه حرارتی مطالعه"
+          }
+        }
+      }
+    },
+    "Study all due cards": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرور همه کارت‌های آماده"
+          }
+        }
+      }
+    },
+    "Subscription": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اشتراک"
+          }
+        }
+      }
+    },
+    "Support": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پشتیبانی"
+          }
+        }
+      }
+    },
+    "Syncing…": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "در حال همگام‌سازی…"
+          }
+        }
+      }
+    },
+    "Terms of Use": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شرایط استفاده"
+          }
+        }
+      }
+    },
+    "Title": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عنوان"
+          }
+        }
+      }
+    },
+    "Turn your textbooks into flashcards": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کتاب‌های درسی‌تان را به فلش‌کارت تبدیل کنید"
+          }
+        }
+      }
+    },
+    "Upgrade": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ارتقا"
+          }
+        }
+      }
+    },
+    "Vocabulary": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "واژگان"
+          }
+        }
+      }
+    },
+    "Waiting": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "در انتظار"
+          }
+        }
+      }
+    },
+    "Weekly Progress": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پیشرفت هفتگی"
+          }
+        }
+      }
+    },
+    "Welcome": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خوش آمدید"
+          }
+        }
+      }
+    },
+    "Words, definitions, grammar, page text…": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "واژه‌ها، تعریف‌ها، دستور زبان، متن صفحات…"
+          }
+        }
+      }
+    },
+    "Your answer": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پاسخ شما"
+          }
+        }
+      }
+    },
+    "Your native language": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زبان مادری شما"
+          }
+        }
+      }
+    },
+    "iCloud Sync": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "همگام‌سازی iCloud"
+          }
+        }
+      }
+    },
+    "iCloud sync is off": {
+      "localizations": {
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "همگام‌سازی iCloud خاموش است"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
