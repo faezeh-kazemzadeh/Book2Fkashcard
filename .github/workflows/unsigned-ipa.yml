@@ -1,0 +1,73 @@
+name: Unsigned IPA
+
+# Builds a Release archive WITHOUT code signing and packages it as an .ipa.
+# An unsigned IPA cannot be installed as-is: it must be signed before iOS will
+# run it (e.g. with a free Apple ID via Sideloadly/AltStore – see docs/SIDELOADING.md).
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, "claude/**"]
+    paths-ignore:
+      - "**/*.md"
+
+concurrency:
+  group: unsigned-ipa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ipa:
+    name: Build unsigned IPA
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.4.app || sudo xcode-select -s "$(ls -d /Applications/Xcode*.app | sort -V | tail -1)"
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate project
+        run: B2F_TEAM_ID="" xcodegen generate
+
+      - name: Archive (Release, unsigned)
+        run: |
+          set -o pipefail
+          xcodebuild archive \
+            -project Book2Flashcards.xcodeproj \
+            -scheme Book2Flashcards \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -archivePath build/Book2Flashcards.xcarchive \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGN_ENTITLEMENTS="" \
+            DEVELOPMENT_TEAM="" | xcbeautify
+
+      - name: Package IPA
+        run: |
+          APP="build/Book2Flashcards.xcarchive/Products/Applications/Book2Flashcards.app"
+          test -d "$APP" || { echo "App bundle not found in archive"; exit 1; }
+          rm -rf build/ipa && mkdir -p build/ipa/Payload
+          cp -R "$APP" build/ipa/Payload/
+          VERSION=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "$APP/Info.plist")
+          BUILD=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$APP/Info.plist")
+          NAME="Book2Flashcards-${VERSION}-${BUILD}-${GITHUB_SHA::7}-unsigned.ipa"
+          (cd build/ipa && zip -qry "../$NAME" Payload)
+          echo "IPA_NAME=$NAME" >> "$GITHUB_ENV"
+          # Sanity checks: correct platform, arm64 binary, not signed.
+          /usr/libexec/PlistBuddy -c "Print CFBundleSupportedPlatforms:0" "$APP/Info.plist"
+          lipo -info "$APP/Book2Flashcards"
+          codesign -dv "$APP" 2>&1 | head -3 || true
+          ls -lh "build/$NAME"
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.IPA_NAME }}
+          path: build/${{ env.IPA_NAME }}
+          retention-days: 30
+          if-no-files-found: error
