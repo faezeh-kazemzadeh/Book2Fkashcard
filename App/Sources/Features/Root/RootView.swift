@@ -26,19 +26,20 @@ enum AppTab: String, CaseIterable, Identifiable {
     }
 }
 
-/// Tab bar on iPhone, sidebar split view on iPad (with keyboard shortcuts ⌘1–⌘5).
+/// Tab bar on iPhone, sidebar split view on iPad. Keyboard navigation (⌘1–⌘5)
+/// is provided as menu commands by `Book2FlashcardsApp` (`NavigationCommands`).
 struct RootView: View {
     @Environment(AppModel.self) private var model
     @Environment(AppSettings.self) private var settings
     @Environment(\.horizontalSizeClass) private var sizeClass
-    @State private var selection: AppTab = .dashboard
 
     var body: some View {
         @Bindable var model = model
+        let selection = model.selectedTab
         Group {
             if sizeClass == .regular {
                 NavigationSplitView {
-                    List(AppTab.allCases, selection: Binding<AppTab?>($selection)) { tab in
+                    List(AppTab.allCases, selection: Binding<AppTab?>($model.selectedTab)) { tab in
                         Label(tab.title, systemImage: tab.systemImage).tag(tab)
                     }
                     .navigationTitle("Book2Flashcards")
@@ -46,7 +47,7 @@ struct RootView: View {
                     content(for: selection)
                 }
             } else {
-                TabView(selection: $selection) {
+                TabView(selection: $model.selectedTab) {
                     ForEach(AppTab.allCases) { tab in
                         content(for: tab)
                             .tabItem { Label(tab.title, systemImage: tab.systemImage) }
@@ -55,7 +56,6 @@ struct RootView: View {
                 }
             }
         }
-        .background(shortcuts)
         .sheet(item: $model.presentedPaywall) { feature in
             PaywallView(highlightedFeature: feature)
         }
@@ -65,7 +65,7 @@ struct RootView: View {
         }
         .overlay(alignment: .bottom) { ToastView(message: $model.toast) }
         .onChange(of: model.pendingOpenURL) { _, url in
-            if url != nil { selection = .library }
+            if url != nil { model.selectedTab = .library }
         }
     }
 
@@ -85,16 +85,18 @@ struct RootView: View {
         case .settings: NavigationStack { SettingsView() }
         }
     }
+}
 
-    /// Hidden buttons providing iPad hardware-keyboard navigation.
-    private var shortcuts: some View {
-        VStack {
+/// iPad hardware-keyboard navigation, listed in the ⌘-hold shortcut overlay.
+struct NavigationCommands: Commands {
+    let model: AppModel
+
+    var body: some Commands {
+        CommandMenu("Go") {
             ForEach(Array(AppTab.allCases.enumerated()), id: \.element) { index, tab in
-                Button(tab.title) { selection = tab }
+                Button(tab.title) { model.selectedTab = tab }
                     .keyboardShortcut(KeyEquivalent(Character("\(index + 1)")), modifiers: .command)
             }
         }
-        .opacity(0)
-        .accessibilityHidden(true)
     }
 }

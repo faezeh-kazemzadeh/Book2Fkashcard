@@ -18,6 +18,7 @@ struct Book2FlashcardsApp: App {
                 .task { await model.start() }
                 .onOpenURL { url in model.pendingOpenURL = url }
         }
+        .commands { NavigationCommands(model: model) }
         .onChange(of: scenePhase) { _, phase in
             if phase == .active {
                 Task { await model.store.refreshEntitlements() }

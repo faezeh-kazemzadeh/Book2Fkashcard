@@ -25,6 +25,8 @@ final class AppModel {
     var toast: String?
     /// A document opened from another app ("Open in Book2Flashcards" / share sheet).
     var pendingOpenURL: URL?
+    /// Current top-level section (tab on iPhone, sidebar on iPad, ⌘1–⌘5 menu commands).
+    var selectedTab: AppTab = .dashboard
 
     struct ImportProgress: Equatable {
         var title: String
