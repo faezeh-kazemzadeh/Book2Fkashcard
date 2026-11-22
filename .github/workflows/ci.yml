@@ -32,6 +32,7 @@ jobs:
   ios:
     name: iOS app (build, unit, integration & UI tests)
     runs-on: macos-15
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - name: Select Xcode

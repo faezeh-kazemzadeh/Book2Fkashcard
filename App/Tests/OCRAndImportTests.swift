@@ -36,11 +36,15 @@ final class OCRTests: XCTestCase {
         ])
         let result = try await OCREngine().recognize(image: page, pageIndex: 0, languages: [.english], mode: .basic)
         let text = result.plainText.lowercased()
-        XCTAssertTrue(text.contains("resilient"), text)
-        XCTAssertTrue(text.contains("nutritious"), text)
-        XCTAssertGreaterThan(result.analyzed.averageConfidence, 0.5)
-        XCTAssertEqual(result.analyzed.blocks.first?.kind, .lessonTitle)
-        XCTAssertTrue(result.analyzed.blocks.contains { $0.kind == .vocabularyList })
+        let layout = result.analyzed.blocks.map { "\($0.kind.rawValue): \($0.lines)" }.joined(separator: "\n")
+        let raw = result.observations.map { "\($0.text) @\(String(format: "%.3f,%.3f h%.3f", $0.boundingBox.x, $0.boundingBox.y, $0.boundingBox.height))" }
+            .joined(separator: "\n")
+        let diagnostics = "Blocks:\n\(layout)\nObservations:\n\(raw)"
+        XCTAssertTrue(text.contains("resilient"), diagnostics)
+        XCTAssertTrue(text.contains("nutritious"), diagnostics)
+        XCTAssertGreaterThan(result.analyzed.averageConfidence, 0.5, diagnostics)
+        XCTAssertEqual(result.analyzed.blocks.first?.kind, .lessonTitle, diagnostics)
+        XCTAssertTrue(result.analyzed.blocks.contains { $0.kind == .vocabularyList }, diagnostics)
         XCTAssertNotNil(result.preprocessedJPEG)
     }
 

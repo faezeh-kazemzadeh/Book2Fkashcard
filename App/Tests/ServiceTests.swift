@@ -1,6 +1,7 @@
 import XCTest
 import SwiftData
 import StoreKitTest
+import CryptoKit
 import B2FCore
 @testable import Book2Flashcards
 
@@ -81,14 +82,32 @@ final class AnkiExportServiceTests: XCTestCase {
 
 final class SecurityTests: XCTestCase {
     func testEncryptedFileStoreRoundTrip() throws {
-        let store = EncryptedFileStore(rootDirectory: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString))
+        let store = EncryptedFileStore(rootDirectory: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString),
+                                       fixedKey: SymmetricKey(size: .bits256))
         let secret = Data("page image bytes".utf8)
         let sealed = try store.seal(secret)
         XCTAssertNotEqual(sealed, secret)
         XCTAssertEqual(try store.open(sealed), secret)
+        // Tampering must be detected (AES-GCM authentication).
+        var tampered = sealed
+        tampered[tampered.count - 1] ^= 0xFF
+        XCTAssertThrowsError(try store.open(tampered))
+    }
+
+    /// Unsigned simulator builds (CI uses CODE_SIGNING_ALLOWED=NO) have no Keychain
+    /// entitlement and get errSecMissingEntitlement (-34018). Signed builds run this test.
+    private func skipIfKeychainUnavailable() throws {
+        let probe = KeychainStore(service: "b2f.keychain.probe")
+        do {
+            try probe.set(Data([1]), for: "probe")
+            try probe.remove("probe")
+        } catch let error as KeychainStore.KeychainError where error.status == -34018 {
+            throw XCTSkip("Keychain unavailable in unsigned builds (errSecMissingEntitlement).")
+        }
     }
 
     func testSecureSecretStoreRoundTrip() throws {
+        try skipIfKeychainUnavailable()
         let store = SecureSecretStore()
         let account = "test-\(UUID().uuidString)"
         try store.store("sk-test-123", account: account)

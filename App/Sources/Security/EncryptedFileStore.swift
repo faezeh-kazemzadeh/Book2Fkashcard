@@ -13,6 +13,8 @@ final class EncryptedFileStore: @unchecked Sendable {
     private let keychain = KeychainStore()
     private let keyAccount = "content-encryption-key-v1"
     private var cachedKey: SymmetricKey?
+    /// Overrides the Keychain-backed key (tests). Production always uses the Keychain.
+    private let fixedKey: SymmetricKey?
     private let lock = NSLock()
 
     /// Local, non-synced storage for originals and generated media (TTS audio).
@@ -20,7 +22,8 @@ final class EncryptedFileStore: @unchecked Sendable {
     var mediaDirectory: URL { rootDirectory.appendingPathComponent("Media", isDirectory: true) }
     var originalsDirectory: URL { rootDirectory.appendingPathComponent("Originals", isDirectory: true) }
 
-    init(rootDirectory: URL? = nil) {
+    init(rootDirectory: URL? = nil, fixedKey: SymmetricKey? = nil) {
+        self.fixedKey = fixedKey
         let base = rootDirectory ?? FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("Book2Flashcards", isDirectory: true)
         self.rootDirectory = base
@@ -56,6 +59,7 @@ final class EncryptedFileStore: @unchecked Sendable {
     }
 
     private func key() throws -> SymmetricKey {
+        if let fixedKey { return fixedKey }
         lock.lock()
         defer { lock.unlock() }
         if let cachedKey { return cachedKey }

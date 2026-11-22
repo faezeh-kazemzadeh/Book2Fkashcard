@@ -33,12 +33,16 @@ struct StatTile: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Label(title, systemImage: systemImage)
-                .font(.footnote.weight(.medium))
-                .foregroundStyle(.secondary)
+            // Colour lives on the icon only; text stays in high-contrast label colours (WCAG AA).
+            Label {
+                Text(title).foregroundStyle(.secondary)
+            } icon: {
+                Image(systemName: systemImage).foregroundStyle(tint)
+            }
+            .font(.footnote.weight(.medium))
             Text(value)
                 .font(.title2.weight(.semibold).monospacedDigit())
-                .foregroundStyle(tint)
+                .foregroundStyle(.primary)
                 .minimumScaleFactor(0.6)
                 .lineLimit(1)
         }

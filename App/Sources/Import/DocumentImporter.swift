@@ -144,6 +144,11 @@ final class PDFPageSource: PageSource, @unchecked Sendable {
     var pageCount: Int { document.pageCount }
 
     func page(at index: Int) async throws -> PageContent {
+        try pageContent(at: index)
+    }
+
+    /// PDFKit documents are not thread-safe; serialise access synchronously.
+    private func pageContent(at index: Int) throws -> PageContent {
         lock.lock()
         defer { lock.unlock() }
         guard let page = document.page(at: index) else { throw DocumentImportError.unreadable("PDF page") }
