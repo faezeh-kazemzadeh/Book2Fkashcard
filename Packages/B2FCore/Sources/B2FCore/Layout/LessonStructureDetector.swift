@@ -84,7 +84,9 @@ public struct LessonStructureDetector: Sendable {
                 }
 
                 ensureLesson(page: page.pageIndex)
-                currentLesson?.pageRange = currentLesson!.pageRange.lowerBound...max(currentLesson!.pageRange.upperBound, page.pageIndex)
+                if let range = currentLesson?.pageRange {
+                    currentLesson?.pageRange = range.lowerBound...max(range.upperBound, page.pageIndex)
+                }
 
                 if block.kind == .heading {
                     closeSection()
