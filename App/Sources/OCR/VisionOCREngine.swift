@@ -34,7 +34,7 @@ struct VisionTextBackend: OCRBackend {
             guard let candidate = observation.topCandidates(1).first else { return nil }
             let box = observation.boundingBox
             // Vision: normalised, bottom-left origin → core: top-left origin.
-            let rect = NormalizedRect(x: box.minX, y: 1 - box.maxY, width: box.width, height: box.height)
+            let rect = B2FCore.NormalizedRect(x: box.minX, y: 1 - box.maxY, width: box.width, height: box.height)
             let text = plan.postProcess(candidate.string)
             return OCRTextObservation(text: text, boundingBox: rect,
                                       confidence: plan.adjustedConfidence(Double(candidate.confidence), text: text))
@@ -89,7 +89,7 @@ struct OCREngine: Sendable {
     }
 
     /// Framed regions (grammar boxes, tip boxes) via rectangle detection.
-    private func detectFramedBoxes(_ image: CGImage) -> [NormalizedRect] {
+    private func detectFramedBoxes(_ image: CGImage) -> [B2FCore.NormalizedRect] {
         let request = VNDetectRectanglesRequest()
         request.minimumSize = 0.15
         request.maximumObservations = 6
@@ -101,7 +101,7 @@ struct OCREngine: Sendable {
             let box = rect.boundingBox
             // Skip the page border itself.
             guard box.width < 0.95 || box.height < 0.95 else { return nil }
-            return NormalizedRect(x: box.minX, y: 1 - box.maxY, width: box.width, height: box.height)
+            return B2FCore.NormalizedRect(x: box.minX, y: 1 - box.maxY, width: box.width, height: box.height)
         }
     }
 }
