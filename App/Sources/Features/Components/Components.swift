@@ -35,7 +35,7 @@ struct StatTile: View {
         VStack(alignment: .leading, spacing: 6) {
             // Colour lives on the icon only; text stays in high-contrast label colours (WCAG AA).
             Label {
-                Text(title).foregroundStyle(.secondary)
+                Text(title).foregroundStyle(.primary)
             } icon: {
                 Image(systemName: systemImage).foregroundStyle(tint)
             }

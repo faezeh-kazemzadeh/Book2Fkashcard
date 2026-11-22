@@ -14,7 +14,8 @@ public struct LayoutAnalyzer: Sendable {
         /// Observations below this confidence are flagged for user review.
         public var lowConfidenceThreshold: Double = 0.5
         /// Vertical gap (in median line heights) that starts a new block.
-        public var paragraphGapRatio: Double = 0.9
+        /// Textbooks commonly use generous leading (~1× line height between lines).
+        public var paragraphGapRatio: Double = 1.2
         public init() {}
     }
 
@@ -102,6 +103,24 @@ public struct LayoutAnalyzer: Sendable {
                     continue
                 }
             }
+
+            // Vocabulary lists: ≥ 2 consecutive "term – meaning" lines, whatever the spacing.
+            if row.cells.count == 1, Self.splitVocabularyPair(row.text) != nil {
+                var end = index
+                while end + 1 < rows.count, rows[end + 1].cells.count == 1,
+                      Self.splitVocabularyPair(rows[end + 1].text) != nil {
+                    end += 1
+                }
+                if end > index {
+                    flushParagraph()
+                    blocks.append(makeBlock(from: Array(rows[index...end]), kind: .vocabularyList, pageIndex: pageIndex))
+                    index = end + 1
+                    continue
+                }
+            }
+
+            // A line led by a section keyword ("Grammar:", "Exercise 2") starts a new block.
+            if Self.startsSection(row.text) { flushParagraph() }
 
             // Paragraph grouping by vertical gap.
             if let last = pending.last, row.frame.minY - last.frame.maxY > medianHeight * configuration.paragraphGapRatio {
@@ -241,6 +260,11 @@ public struct LayoutAnalyzer: Sendable {
         }
         return LayoutBlock(kind: kind, pageIndex: pageIndex, lines: rows.map(\.text), rows: tableRows,
                            boundingBox: frame, confidence: confidence)
+    }
+
+    static func startsSection(_ text: String) -> Bool {
+        let lower = text.lowercased().trimmingCharacters(in: .whitespaces)
+        return (grammarKeywords + vocabularyKeywords + exerciseKeywords).contains { lower.hasPrefix($0) }
     }
 
     /// "abandon – رها کردن" → ["abandon", "رها کردن"]
