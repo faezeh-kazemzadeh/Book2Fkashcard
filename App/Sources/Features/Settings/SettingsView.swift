@@ -199,7 +199,8 @@ struct AIProviderSettingsView: View {
             defer { isTesting = false }
             do {
                 let response = try await provider.complete(AIRequest(system: "Reply with the single word OK.", user: "Ping", maxOutputTokens: 200))
-                testResult = String(localized: "Connected ✓ (\(response.text.prefix(20)))")
+                let preview = String(response.text.prefix(20))
+                testResult = String(localized: "Connected ✓ (\(preview))")
             } catch {
                 testResult = error.localizedDescription
             }

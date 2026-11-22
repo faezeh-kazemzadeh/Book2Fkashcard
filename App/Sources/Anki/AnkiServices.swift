@@ -78,8 +78,10 @@ struct AnkiExportService {
             guard let lesson = repository.lesson(id: id) else { return ([], [], "Lesson") }
             return ([lesson], lesson.unit?.book.map { [$0] } ?? [], "\(lesson.unit?.book?.title ?? "Book") - \(lesson.title)")
         case .lessons(let ids):
-            let lessons = ids.compactMap(repository.lesson(id:)).sorted {
-                ($0.unit?.order ?? 0, $0.order) < ($1.unit?.order ?? 0, $1.order)
+            let lessons = ids.compactMap(repository.lesson(id:)).sorted { lhs, rhs in
+                let lhsUnit: Int = lhs.unit?.order ?? 0
+                let rhsUnit: Int = rhs.unit?.order ?? 0
+                return lhsUnit != rhsUnit ? lhsUnit < rhsUnit : lhs.order < rhs.order
             }
             let books = Array(Set(lessons.compactMap { $0.unit?.book?.id })).compactMap(repository.book(id:))
             return (lessons, books, books.first?.title ?? "Lessons")

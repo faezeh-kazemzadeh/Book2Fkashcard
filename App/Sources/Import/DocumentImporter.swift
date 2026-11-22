@@ -134,7 +134,7 @@ final class PDFPageSource: PageSource, @unchecked Sendable {
     init(document: PDFDocument) {
         self.document = document
         // Sample a few pages: if they have no meaningful text layer, treat the PDF as scanned.
-        let samples = stride(from: 0, to: document.pageCount, by: max(1, document.pageCount / 5)).prefix(5)
+        let samples = Array(stride(from: 0, to: document.pageCount, by: max(1, document.pageCount / 5)).prefix(5))
         let textual = samples.filter { index in
             (document.page(at: index)?.string ?? "").filter(\.isLetter).count > 80
         }.count

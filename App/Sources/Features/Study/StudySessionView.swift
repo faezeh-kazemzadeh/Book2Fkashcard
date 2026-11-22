@@ -28,7 +28,7 @@ struct StudyHomeView: View {
                     } label: {
                         VStack(alignment: .leading) {
                             Text(book.title)
-                            Text("\(book.allCards.filter { $0.phaseRaw != CardPhase.new.rawValue && $0.due <= Date() }.count) due · \(book.allCards.filter { $0.phaseRaw == CardPhase.new.rawValue }.count) new")
+                            Text(counts(for: book))
                                 .font(.caption).foregroundStyle(.secondary)
                         }
                     }
@@ -36,6 +36,21 @@ struct StudyHomeView: View {
             }
         }
         .navigationTitle("Study")
+    }
+
+    private func counts(for book: BookEntity) -> String {
+        let now = Date()
+        let newPhase = CardPhase.new.rawValue
+        var due = 0
+        var fresh = 0
+        for card in book.allCards {
+            if card.phaseRaw == newPhase {
+                fresh += 1
+            } else if card.due <= now {
+                due += 1
+            }
+        }
+        return String(localized: "\(due) due · \(fresh) new")
     }
 }
 
