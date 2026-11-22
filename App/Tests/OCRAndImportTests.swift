@@ -36,10 +36,11 @@ final class OCRTests: XCTestCase {
         ])
         let result = try await OCREngine().recognize(image: page, pageIndex: 0, languages: [.english], mode: .basic)
         let text = result.plainText.lowercased()
-        let layout = result.analyzed.blocks.map { "\($0.kind.rawValue): \($0.lines)" }.joined(separator: "\n")
+        let layout = result.analyzed.blocks.map { "\($0.kind.rawValue): \($0.lines)" }.joined(separator: " | ")
         let raw = result.observations.map { "\($0.text) @\(String(format: "%.3f,%.3f h%.3f", $0.boundingBox.x, $0.boundingBox.y, $0.boundingBox.height))" }
-            .joined(separator: "\n")
-        let diagnostics = "Blocks:\n\(layout)\nObservations:\n\(raw)"
+            .joined(separator: " | ")
+        // Single line: CI log formatters keep only the first line of a failure message.
+        let diagnostics = "Blocks: \(layout) || Observations: \(raw)"
         XCTAssertTrue(text.contains("resilient"), diagnostics)
         XCTAssertTrue(text.contains("nutritious"), diagnostics)
         XCTAssertGreaterThan(result.analyzed.averageConfidence, 0.5, diagnostics)

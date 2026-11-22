@@ -53,12 +53,15 @@ final class Book2FlashcardsUITests: XCTestCase {
     func testDashboardAccessibility() throws {
         XCTAssertTrue(app.staticTexts["Dashboard"].waitForExistence(timeout: 5))
         if #available(iOS 17.0, *) {
+            var issues: [String] = []
             try app.performAccessibilityAudit(for: [.dynamicType, .contrast, .elementDetection]) { issue in
                 let element = issue.element
-                print("A11y issue: \(issue.compactDescription) – \(issue.detailedDescription) – element: \(element?.label ?? "nil") [\(element?.elementType.rawValue ?? 0)]")
                 // Charts expose decorative axis elements; ignore those.
-                return element?.elementType == .other
+                if element?.elementType == .other { return true }
+                issues.append("\(issue.compactDescription): '\(element?.label ?? "?")' type=\(element?.elementType.rawValue ?? 0) id='\(element?.identifier ?? "")'")
+                return true // reported below as one readable failure
             }
+            XCTAssertTrue(issues.isEmpty, "Accessibility issues: " + issues.joined(separator: " | "))
         }
     }
 
