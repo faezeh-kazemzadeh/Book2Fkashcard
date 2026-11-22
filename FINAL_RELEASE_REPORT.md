@@ -17,7 +17,7 @@ Both percentages are computed from the weighted checklists in [§5](#5-readiness
 
 ## 1. Current build status
 
-**Last completed CI result: ✅ all three jobs green** – [run #9](https://github.com/faezeh-kazemzadeh/Book2Fkashcard/actions/runs/45033572431) on commit `5923f78`. The PR head has the same source code (later commits only rebased the history and added documentation); CI on the PR head was still running when this report was written – check the PR's checks tab for the latest result.
+**✅ All three jobs green on the PR head** – [run #14](https://github.com/faezeh-kazemzadeh/Book2Fkashcard/actions/runs/45035221843) on commit `fa3bd61` (same source code as the first green run, [#9](https://github.com/faezeh-kazemzadeh/Book2Fkashcard/actions/runs/45033572431) on `5923f78`). Commits after `fa3bd61` change documentation only.
 
 | Job | Toolchain | Last result |
 |---|---|---|
